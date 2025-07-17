@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дневник программиста</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+  <!-- Шапка сайта -->
+  <header class="header">
+    <div class="header__logo">
+      <img src="../static/img/logo.svg" alt="Логотип" width="32" height="32">
+      <span class="header__logo-text">Дневник</span>
+    </div>
+    <ul class="main-list">
+      <li class="list__item">
+        <a href="#">
+          <img src="../static/img/login.svg" alt="Вход" width="20" height="20">
+        </a>
+      </li>
+    </ul>
+  </header>
+
+  <!-- Основное содержимое -->
+  <main class="main">
+    {% block content %}
+    <div class="container">
+      <h1 class="main__title">Мои записи</h1>
+      
+      <!-- Список карточек -->
+      <ul class="cards-list">
+        {% for el in cards %}
+        <li class="card">
+          <a class="card__link" href="/card/{{el.id}}">
+            <div class="card__img">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/>
+              </svg>
+            </div>
+            <div class="card__text">
+              <h2 class="card__title">{{el.title}}</h2>
+              <p class="card__subtitle">{{el.subtitle}}</p>
+              <span class="card__date">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                {{el.date}}
+              </span>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+        
+        <!-- Кнопка создания новой записи -->
+        <li class="card card--creat">
+          <a class="creat__link" href="{{url_for('create')}}"></a>
+        </li>
+      </ul>
+    </div>
+    {% endblock %}
+  </main>
+
+  <!-- Подвал -->
+  <footer class="footer">
+    <p>© 2023 Дневник программиста. Все права защищены.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход | Дневник программиста</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__logo">
+      <img src="../static/img/logo.svg" alt="Логотип" width="32" height="32">
+      <span class="header__logo-text">Дневник</span>
+    </div>
+  </header>
+
+  <main class="main main-login">
+    <div class="container">
+      {% block content %}
+      <form action="{{ url_for('login') }}" method="POST" class="form__card login">
+        <h2 class="text-center">Вход в систему</h2>
+        
+        <!-- Сообщение об ошибке -->
+        {% if error %}
+        <p class="error">{{error}}</p>
+        {% endif %}
+        
+        <!-- Поля формы -->
+        <div class="form__inputs">
+          <div class="form__group">
+            <label for="email" class="form__label">Email</label>
+            <input type="email" id="email" name="email" class="form__input" placeholder="ваш@email.com" required>
+          </div>
+          
+          <div class="form__group">
+            <label for="password" class="form__label">Пароль</label>
+            <input type="password" id="password" name="password" class="form__input" placeholder="Ваш пароль" required>
+          </div>
+        </div>
+        
+        <!-- Кнопки -->
+        <button type="submit" class="form__button btn--primary">Войти</button>
+        <a href="/reg" class="form__button btn--outline">Зарегистрироваться</a>
+      </form>
+      {% endblock %}
+    </div>
+  </main>
+</body>
+</html> 
